@@ -2,26 +2,19 @@ package com.yusufcakmak.exoplayersample;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.exoplayer2.ExoPlaybackException;
-import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
@@ -44,13 +37,16 @@ public class RadioPlayerActivity extends AppCompatActivity {
     private DataSource.Factory dataSourceFactory;
     private MediaSource mediaSource;
 
+    private static String radioUrl="http://storage.googleapis.com/automotive-media/Jazz_In_Paris.mp3";
+    //private static String radioUrl="http://radio.compinche.net:7662/gypsy.ogg";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio_player);
 
-        startButton = (Button) findViewById(R.id.startButton);
-        stopButton = (Button) findViewById(R.id.stopButton);
+        startButton = findViewById(R.id.startButton);
+        stopButton = findViewById(R.id.stopButton);
 
         bandwidthMeter = new DefaultBandwidthMeter();
         extractorsFactory = new DefaultExtractorsFactory();
@@ -68,7 +64,7 @@ public class RadioPlayerActivity extends AppCompatActivity {
                 Util.getUserAgent(this, "mediaPlayerSample"), defaultBandwidthMeter);
 
 
-        mediaSource = new ExtractorMediaSource(Uri.parse("http://radio.compinche.net:7662/gypsy.ogg"), dataSourceFactory, extractorsFactory, null, null);
+        mediaSource = new ExtractorMediaSource(Uri.parse(radioUrl), dataSourceFactory, extractorsFactory, null, null);
 
         player = ExoPlayerFactory.newSimpleInstance(this, trackSelector);
 

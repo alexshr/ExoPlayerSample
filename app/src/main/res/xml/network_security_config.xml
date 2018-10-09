@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- alexshr https://stackoverflow.com/a/50834600/2886841-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">storage.googleapis.com</domain>
+    </domain-config>
+</network-security-config>
